@@ -26,13 +26,13 @@
 # Manifest list
 GatherManifest.lua
 
+# Base object definition
+GatherObjects.lua
+
 # Libraries
 Swag\LibSwag.lua
 Astrolabe\Load.xml
 Libs\Load.xml
-
-# Base object definition
-GatherObjects.lua
 
 # Translations
 GatherNodes.lua

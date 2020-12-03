@@ -53,6 +53,14 @@ function Gatherer.MiniNotes.Show()
 	end
 end
 
+-- change minimap frame from outside of gatherer
+function Gatherer.MiniNotes.SetCurrentMinimap(frame)
+	Gatherer.MiniNotes.Hide()
+	Gatherer.Var.CurrentMinimap = frame
+	Gatherer.MiniNotes.Show()
+	Gatherer.MiniNotes.ForceUpdate()
+end
+
 function Gatherer.MiniNotes.ForceUpdate()
 	if ( GatherMiniNoteUpdateFrame:IsShown() ) then
 		Gatherer.MiniNotes.UpdateMinimapNotes(0, true)
@@ -70,9 +78,12 @@ end
 local function GetMinimapNote( index )
 	local note = Gatherer.MiniNotes.Notes[index]
 	if not ( note ) then
-		note = CreateFrame("Button", "GatherNote"..index, Minimap, "GatherNoteTemplate")
+		note = CreateFrame("Button", "GatherNote"..index, Gatherer.Var.CurrentMinimap, "GatherNoteTemplate")
 		Gatherer.MiniNotes.Notes[index] = note
 		note:SetID(index)
+	end
+	if note:GetParent() ~= Gatherer.Var.CurrentMinimap then
+		note:SetParent(Gatherer.Var.CurrentMinimap)
 	end
 	return note
 end
@@ -294,7 +305,7 @@ end
 
 -- Pass on any node clicks
 function Gatherer.MiniNotes.MiniNoteOnClick()
-	this = Minimap
+	this = Gatherer.Var.CurrentMinimap
 	Minimap_OnClick()
 end
 

@@ -382,7 +382,7 @@ local function placeIconOnMinimap( minimap, minimapZoom, mapWidth, mapHeight, ic
 	local iconDiameter = ((icon:GetWidth() / 2) + 3) * xScale;
 	local iconOnEdge = nil;
 	local isRound = true;
-	
+
 	if ( minimapRotationEnabled ) then
 		-- for the life of me, I cannot figure out why the following 
 		-- math works, but it does
@@ -457,7 +457,7 @@ function Astrolabe:PlaceIconOnMinimap( icon, continent, zone, xPos, yPos )
 	minimapShape = GetMinimapShape and ValidMinimapShapes[GetMinimapShape()];
 	
 	-- place the icon on the Minimap and :Show() it
-	local map = Minimap
+	local map = Gatherer.Var.CurrentMinimap
 	placeIconOnMinimap(map, map:GetZoom(), map:GetWidth(), map:GetHeight(), icon, dist, xDist, yDist);
 	icon:Show()
 	
@@ -509,7 +509,7 @@ do
 			
 			local C, Z, x, y = self:GetCurrentPlayerPosition();
 			if ( C and C >= 0 ) then
-				local Minimap = Minimap;
+				local Minimap = Gatherer.Var.CurrentMinimap;
 				local lastPosition = self.LastPlayerPosition;
 				local lC, lZ, lx, ly = unpack(lastPosition);
 				
@@ -643,9 +643,9 @@ do
 				-- check Minimap Shape
 				minimapShape = GetMinimapShape and ValidMinimapShapes[GetMinimapShape()];
 				
-				local currentZoom = Minimap:GetZoom();
+				local currentZoom = Gatherer.Var.CurrentMinimap:GetZoom();
 				lastZoom = currentZoom;
-				local Minimap = Minimap;
+				local Minimap = Gatherer.Var.CurrentMinimap;
 				local mapWidth = Minimap:GetWidth();
 				local mapHeight = Minimap:GetHeight();
 				local count = 0
@@ -804,7 +804,7 @@ end
 function Astrolabe:OnEvent( frame, event )
 	if ( event == "MINIMAP_UPDATE_ZOOM" ) then
 		-- update minimap zoom scale
-		local Minimap = Minimap;
+		local Minimap = Gatherer.Var.CurrentMinimap;
 		local curZoom = Minimap:GetZoom();
 		if ( GetCVar("minimapZoom") == GetCVar("minimapInsideZoom") ) then
 			if ( curZoom < 2 ) then
@@ -916,7 +916,7 @@ local function activate( newInstance, oldInstance )
 	
 	local frame = newInstance.processingFrame;
 	frame:Hide();
-	frame:SetParent("Minimap");
+	frame:SetParent(Gatherer.Var.CurrentMinimap);
 	frame:UnregisterAllEvents();
 	frame:RegisterEvent("MINIMAP_UPDATE_ZOOM");
 	frame:RegisterEvent("PLAYER_LEAVING_WORLD");

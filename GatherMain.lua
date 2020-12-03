@@ -65,6 +65,7 @@ Gatherer.Var.StoreCount = 3
 Gatherer.Var.StoreHarvested = 4
 Gatherer.Var.StoreInspected = 5
 Gatherer.Var.StoreSource = 6
+Gatherer.Var.CurrentMinimap = Minimap
 
 
 StaticPopupDialogs["GATHERER_VERSION_DIALOG"] = {

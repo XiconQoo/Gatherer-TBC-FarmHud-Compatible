@@ -29,7 +29,7 @@
 	<Script>Gatherer_RegisterRevision("$URL: http://svn.norganna.org/gatherer/trunk/Gatherer/GatherMiniNotes.xml $", "$Rev: 663 $")</Script>
 	<Script file = "GatherMiniNotes.lua"/>
 	
-	<Frame name="GatherMiniNoteUpdateFrame" hidden="true" parent="Minimap">
+	<Frame name="GatherMiniNoteUpdateFrame" hidden="true" parent="Gatherer.Var.CurrentMinimap">
 		<Scripts>
 			<OnUpdate>
 				Gatherer.MiniNotes.UpdateMinimapNotes(elapsed)
@@ -41,7 +41,7 @@
 	</Frame>
 	
 	<!-- Minimap Note Template -->
-	<Button name="GatherNoteTemplate" hidden="true"  parent="Minimap" virtual="true">
+	<Button name="GatherNoteTemplate" hidden="true"  parent="Gatherer.Var.CurrentMinimap" virtual="true">
 		<Size>
 			<AbsDimension x="12" y="12"/>
 		</Size>
@@ -54,7 +54,7 @@
 		</Anchors>
 		<Scripts>
 			<OnLoad>
-				
+
 			</OnLoad>
 			<OnEnter>
 				Gatherer.MiniNotes.MiniNoteOnEnter(self)
